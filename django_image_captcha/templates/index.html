@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en" data-bs-theme="dark">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <title>Django Image Captcha</title>
+  </head>
+  <body>
+    <main class="container-fluid">
+      <div class="row">
+	<div class="col-md-4 offset-md-4 col-12">
+	  <h1 class="text-center text-decoration-underline mb-5">Sign up for an Account</h1>
+	  <div class="row">
+	    <div class="mx-auto" style="height: 100vh">
+	      <form method="POST" id="signupForm">
+		{% csrf_token %}
+		<input type="hidden" name="next" value="{{ next }}">
+		<div class="col-6 mb-3 w-100">
+		  <div class="col">
+		    <label for="inputFirstName"
+			   class="fw-bold form-label">First Name</label>
+		    <input type="text"
+			   class="w-100 form-control"
+			   name="firstname"
+			   placeholder="enter your first name here"
+			   id="inputFirstName"
+			   value="{{firstname}}" required>
+		  </div>
+		  <div class="col">
+		    <label for="inputLastName"
+			   class="fw-bold form-label">Last Name</label>
+		    <input type="text"
+			   class="w-100 form-control"
+			   name="lastname"
+			   placeholder="enter your last name here"
+			   id="inputLastName"
+			   value="{{lastname}}" required>
+		  </div>
+		</div>
+		<div class="col-6 mb-3 w-100">
+		  <label for="inputEmail"
+			 class="fw-bold form-label">Your Email</label>
+		  <input type="email"
+			 class="w-100 form-control"
+			 name="email"
+			 placeholder="enter your email here"
+			 value="{{email}}"
+			 id="inputEmail" required>
+		</div>
+
+		<div class="col-6 mb-3 w-100">
+		  <label for="inputPassword"
+			 class="fw-bold form-label">Enter Password</label>
+		  <input type="password"
+			 class="w-100 form-control"
+			 name="password"
+			 placeholder="enter password"
+			 id="inputPassword" required>
+		</div>
+
+		<div class="col-6 mb-3 w-100">
+		  <label for="inputPasswordAgain"
+			 class="fw-bold form-label">Password Again</label>
+		  <input type="password"
+			 class="w-100 form-control"
+			 name="password_again"
+			 placeholder="re-enter password"
+			 id="inputPasswordAgain" required>
+		</div>
+
+		<div class="col-6 mb-3 px-3 pt-3 w-100 border rounded">
+		  <div class="row mb-3">
+		    <div class="col-4">
+		      <img id="captchaImage"
+			   src="{{captcha_image}}"
+			   style="cursor: auto; height: 100px; width: 200px;"
+			   class="placeholder card-img-top img-fluid rounded"
+			   alt="enter captcha text below">
+		    </div>
+		    <div class="col-8">
+		      <h5 class="card-title mb-1">Prove you are human</h5>
+		      <div>
+			<input type="text"
+			       class="form-control"
+			       id="captchaText"
+			       name="captchaText"
+			       placeholder="enter text from above image" required>
+			<div style="font-size: 0.8em"
+			     class="form-text d-flex justify-content-between">
+			  <span>All uppercase letters</span>
+			  <div class="text-end">
+			    <a id="refreshCaptcha"
+			       class="text-decoration-none"
+			       onclick="refreshCaptcha()"
+			       href="javascript:void(0)">Refresh image</a></div>
+			</div>
+		      </div>
+		    </div>
+		  </div>
+		  <div id="errorMesg"
+		       style="display: none; font-size: 0.8em"
+		       class="text-danger text-center">
+		    Image verification failed! Please retry.
+		  </div>
+		</div>
+
+		<div class="d-flex justify-content-between align-items-baseline">
+		  <button id="submitBtn"
+			  type="submit" class="btn btn-primary">Sign Up</button>
+		</div>
+		{%if signup_status %}
+		<p class="text-success" id="statusMesg">{{signup_status}}</p>
+		{%elif signup_error %}
+		<p class="text-danger" id="errorMesg">{{signup_error}}</p>
+		{%endif%}
+	      </form>
+	    </div>
+	  </div>
+	</div>
+      </div>
+    </main>
+  </body>
+</html>
+<script src="/assets/js/signup.js"></script>
