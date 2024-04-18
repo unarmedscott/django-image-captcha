@@ -1,12 +1,18 @@
-# Django Image Captcha
+# Banish bots from your forms
 
-This is a django sample application showing how to use image captcha
+**Using Django Image Captcha**
+
+Django Image Captcha is a sample django application showing how to use image captcha
 challenge to prevent bots from filling up your forms. Bots are a
 nuisance which go around filling forms with garbage hoping some human
 will look at what they post. This corrupts your form data with
 junk. To take care of this problem, you can use an image captcha
 challenge to prevent the bots from filling up your data with unwanted
 stuff.
+
+Here is a small demo video:
+
+[Django Image Captcha Demonstration](https://github.com/unarmedscott/django-image-captcha/assets/167281592/82021bc7-a19f-4a77-863a-c98f9a06d9e1)
 
 ## Motivation: Google changed reCAPTCHA pricing
 
